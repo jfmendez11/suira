@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const backend = require('./backend');
+const users = require('./backend/usersCRUD');
+const opportunities = require('./backend/opportunitiesCRUD');
 const path = require('path');
 const passport = require('passport');
 const bodyParser = require('body-parser');
@@ -23,15 +24,15 @@ app.use(passport.initialize());
 let testId;
 
 app.post('/API/signUpUser', (req, res, next) => {
-  backend.signUpUser(req, res, next)
+  users.signUpUser(req, res, next)
 });
 
 app.post('/API/loginUser', (req, res, next) => {
-  backend.loginUser(req, res, next);
+  users.loginUser(req, res, next);
 });
 
 app.get('/API/getUser', (req, res, next) => {
-  backend.findUser(req, res, next);
+  users.findUser(req, res, next);
 });
 
 app.listen(process.env.PORT || 5000, () => {

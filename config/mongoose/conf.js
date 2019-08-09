@@ -7,7 +7,21 @@ const userSchema = mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    industries: [String],
+    tag1: String,
+    tag2: String,
+    tag3: String,
+    tag4: String,
+    tag5: String,
+    links: [String],
+    location: String,
+    phoneNumber: String,
+    address: String,
+    dateOfBirth: String,
+    signUpDate: String,
+    recomended: [String],
+    acceptedTandC: Boolean,
+    verifiedEmail: Boolean,
+    acceptedPrivacy: Boolean,
 });
 
 //Generates hash function to store passwords encrypted

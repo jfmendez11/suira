@@ -1,8 +1,7 @@
-//Here goes routes of backend http requests.
-const jwtSecret = require('./config/passport/jwtConfig');
+const jwtSecret = require('../config/passport/jwtConfig');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const User = require('./config/mongoose/conf');
+const User = require('../config/mongoose/conf');
 const AWS = require('aws-sdk');
 
 AWS.config.update({
@@ -22,7 +21,20 @@ exports.signUpUser = (req, res, next) => {
                 const data = {
                     name: req.body.name,
                     email: req.body.email,
-                    industries: req.body.industries
+                    tag1: req.body.tag1,
+                    tag2: req.body.tag2 ? req.body.tag2 : null,
+                    tag3: req.body.tag3 ? req.body.tag3 : null,
+                    tag4: req.body.tag4 ? req.body.tag4 : null,
+                    tag5: req.body.tag5 ? req.body.tag5 : null,
+                    links: req.body.links,
+                    location: req.body.location,
+                    phoneNumber: req.body.phoneNumber,
+                    dateOfBirth: req.body.dateOfBirth,
+                    signUpDate: `${new Date().getDate()}/${new Date().getMonth()}/${new Date.getFullYear()}`,
+                    recommended: req.body.recommended,
+                    acceptedTandC: req.body.acceptedTandC,
+                    verifiedEmail: false,
+                    acceptedPrivacy: req.body.acceptedPrivacy
                 };
                 //Missing: send verification email
                 User.findOne({email: data.email})
@@ -82,11 +94,13 @@ exports.findUser = (req, res, next) => {
         } else {
             console.log('user found in db from route');
             return res.status(200).send({
-                name: user.name,
-                email: user.email,
-                industries: user.industries,
-                _id: user._id,
+                user
             });
         }
     })(req, res, next);
+};
+
+//Missing. Need to check passport's api to edit a profile
+exports.updateProfile = (req, res, next) => {
+
 };
