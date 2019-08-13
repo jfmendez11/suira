@@ -66,5 +66,3 @@ exports.deleteLink = (req, res, user) => {
         return res.status(200).json(data);
     });
 };
-
-//Count by social network
