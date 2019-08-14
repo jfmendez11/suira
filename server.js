@@ -11,6 +11,8 @@ const mongoose = require('mongoose');
 const app = express();
 const configDB = require('./config/mongoose/database.js');
 
+const appliedRoutes = require('./routes/applied');
+
 mongoose.connect(configDB.url, {useNewUrlParser: true});
 
 require("./config/passport/passport")(passport);
@@ -34,6 +36,8 @@ app.post('/API/loginUser', (req, res, next) => {
 app.get('/API/getUser', (req, res, next) => {
   users.findUser(req, res, next);
 });
+
+app.use('/API/applieds', appliedRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
   testId=1;
