@@ -2,23 +2,23 @@ const mongoose = require('mongoose');
 
 const appliedSchema = mongoose.Schema({
   userId:{
-    type: String
+    type: String,
     required: true
   },
   opportunityId: {
-    type: String
+    type: String,
     required: true
   },
   ratingId:{
-    type: String
+    type: String,
     required: true
   },
   selected: {
-    type: String
+    type: Boolean,
     required: true
   },
   timestamp: {
-    type: String
+    type: String,
     required: true
   },
 });
