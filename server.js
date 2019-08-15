@@ -13,6 +13,7 @@ const configDB = require('./config/mongoose/database.js');
 
 const appliedRoutes = require('./routes/applied');
 const ratingRoutes = require('./routes/rating');
+const inviteRoutes = require('./routes/invite');
 
 mongoose.connect(configDB.url, {useNewUrlParser: true});
 
@@ -40,6 +41,7 @@ app.get('/API/getUser', (req, res, next) => {
 
 app.use('/API/applieds', appliedRoutes);
 app.use('/API/ratings', ratingRoutes);
+app.use('/API/invites', inviteRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
   testId=1;
