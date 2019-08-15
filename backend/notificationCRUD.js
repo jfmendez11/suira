@@ -1,4 +1,4 @@
-const Applied = require('../config/mongoose/applied');
+const Notification = require('../config/mongoose/notification');
 const AWS = require('aws-sdk');
 
 AWS.config.update({
@@ -7,8 +7,8 @@ AWS.config.update({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-exports.getApplieds = (req, res) => {
-  Applied.find((err, rows) => {
+exports.getNotifications = (req,res) => {
+  Notification.find((err, rows) => {
     if(err){
       console.log(err);
       return res.status(404).json({message: "An error occured"});
@@ -17,52 +17,49 @@ exports.getApplieds = (req, res) => {
   });
 };
 
-exports.createApplied = (req, res) => {
-  const newApplied = new Applied({
+exports.createNotification = (req, res) => {
+  const newNotification = new Notification({
+    type: req.body.type,
     userId: req.body.userId,
-    opportunityId: req.body.opportunityId,
-    ratingId: req.body.ratingId,
-    selected: req.body.selected,
-    timestamp: req.body.timestamp
+    read: req.body.read
   });
-  newApplied.save((err) => {
+  newNotification.save((err) => {
     if(err){
       console.log(err);
       return res.status(404).json({message: 'An error occured'});
     }
-    return res.status(201).json(newApplied);
+    return res.status(201).json(newNotification);
   });
 };
 
-exports.getAppliedById = (req,res) => {
-  Applied.findById(req.params._id, (err,applied) =>{
+
+exports.getNotificationById = (req,res) => {
+  Notification.findById(req.params._id, (err,notification) =>{
     if(err){
       console.log(err);
       return res.status(404).json({message: 'An error occured'});
     }
-    return res.status(200).json(applied);
+    return res.status(200).json(notification);
   });
 };
 
-exports.updateApplied = (req,res)=>{
-  Applied.updateOne({_id: req.params._id},
+exports.updateNotification = (req,res)=>{
+  Notification.updateOne({_id: req.params._id},
   {
+    type: req.body.type,
     userId: req.body.userId,
-    opportunityId: req.body.opportunityId,
-    ratingId: req.body.ratingId,
-    selected: req.body.selected,
-    timestamp: req.body.timestamp
-  }, (err, applied) =>{
+    read: req.body.read
+  }, (err, notification) =>{
     if(err){
       console.log(err);
       return res.status(404).json({message: 'An error occured'});
     }
-    return res.status(202).json(applied);
+    return res.status(202).json(notification);
   });
 };
 
-exports.deleteApplied = (req,res) => {
-  Applied.deleteOne({_id: req.params._id}, (err, data) => {
+exports.deleteNotification = (req,res) => {
+  Notification.deleteOne({_id: req.params._id}, (err, data) => {
     if(err){
       console.log(err);
       return res.status(404).json({message: 'An error occured'});
