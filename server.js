@@ -12,6 +12,10 @@ const app = express();
 const configDB = require('./config/mongoose/database.js');
 
 const appliedRoutes = require('./routes/applied');
+const ratingRoutes = require('./routes/rating');
+const inviteRoutes = require('./routes/invite');
+const suggestionRoutes = require('./routes/suggestion');
+const notificationRoutes = require('./routes/notification');
 
 mongoose.connect(configDB.url, {useNewUrlParser: true});
 
@@ -38,6 +42,10 @@ app.get('/API/getUser', (req, res, next) => {
 });
 
 app.use('/API/applieds', appliedRoutes);
+app.use('/API/ratings', ratingRoutes);
+app.use('/API/invites', inviteRoutes);
+app.use('/API/suggestions', suggestionRoutes);
+app.use('/API/notifications', notificationRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
   testId=1;
