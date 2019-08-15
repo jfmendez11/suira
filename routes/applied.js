@@ -8,7 +8,9 @@ router.route('/')
   .post(appliedCRUD.createApplied);
 
 router.route('/:_id')
-  .get(appliedCRUD.getAppliedById);
+  .get(appliedCRUD.getAppliedById)
+  .put(appliedCRUD.updateApplied)
+  .delete(appliedCRUD.deleteApplied);
 
 
 module.exports = router;

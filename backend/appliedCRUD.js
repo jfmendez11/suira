@@ -30,7 +30,7 @@ exports.createApplied = (req, res) => {
       console.log(err);
       return res.status(404).json({message: 'An error occured'});
     }
-    return res.status(202).json(newApplied);
+    return res.status(201).json(newApplied);
   });
 };
 
@@ -42,4 +42,31 @@ exports.getAppliedById = (req,res) => {
     }
     return res.status(200).json(applied);
   })
-}
+};
+
+exports.updateApplied = (req,res)=>{
+  Applied.updateOne({_id: req.params._id},
+  {
+    userId: req.body.userId,
+    opportunityId: req.body.opportunityId,
+    ratingId: req.body.ratingId,
+    selected: req.body.selected,
+    timestamp: req.body.timestamp
+  }, (err, applied) =>{
+    if(err){
+      console.log(err);
+      return res.status(404).json({message: 'An error occured'});
+    }
+    return res.status(202).json(applied);
+  });
+};
+
+exports.deleteApplied = (req,res) => {
+  Applied.deleteOne({_id: req.params._id}, (err, data) => {
+    if(err){
+      console.log(err);
+      return res.status(404).json({message: 'An error occured'});
+    }
+    return res.status(200).json(data)
+  });
+};
