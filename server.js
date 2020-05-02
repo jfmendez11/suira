@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const users = require('./backend/usersCRUD');
-const opportunities = require('./backend/opportunitiesCRUD');
 const path = require('path');
 const passport = require('passport');
 const bodyParser = require('body-parser');
@@ -16,6 +15,7 @@ const ratingRoutes = require('./routes/rating');
 const inviteRoutes = require('./routes/invite');
 const suggestionRoutes = require('./routes/suggestion');
 const notificationRoutes = require('./routes/notification');
+const opportunityRoutes = require('./routes/opportunity');
 
 mongoose.connect(configDB.url, {useNewUrlParser: true});
 
@@ -46,6 +46,7 @@ app.use('/API/ratings', ratingRoutes);
 app.use('/API/invites', inviteRoutes);
 app.use('/API/suggestions', suggestionRoutes);
 app.use('/API/notifications', notificationRoutes);
+app.use('API/opportunities', opportunityRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
   testId=1;

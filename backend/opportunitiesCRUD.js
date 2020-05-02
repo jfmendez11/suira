@@ -18,7 +18,7 @@ exports.getOpportunities = (req, res) => {
 };
 
 exports.getOpportunityById = (req, res) => {
-    Opportunity.findById(req.params._id, (err, opp) => {
+    Opportunity.findById(req.params.oppId, (err, opp) => {
         if (err) {
             console.log(err);
             return res.status(404).json({message: 'An error occured'});
